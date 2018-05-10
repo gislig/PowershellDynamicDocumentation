@@ -1,4 +1,10 @@
-﻿#----------------------------------------------------------------------### Module Name : AuditSoftware.ps1# Created : 11.11.2016# Created by : Gisli Gudmundsson# LinkedIN : https://is.linkedin.com/in/gisli-gudmundsson-11a77639# License Usage : #   This code can be used for private use only#   You may modify this code and distribute##----------------------------------------------------------------------##
+﻿#----------------------------------------------------------------------### Module Name : AuditSoftware.ps1
+# Created : 11.11.2016# Created by : Gisli Gudmundsson
+# LinkedIN : https://is.linkedin.com/in/gisli-gudmundsson-11a77639
+# License Usage : 
+#   This code can be used for private use only
+#   You may modify this code and distribute
+##----------------------------------------------------------------------##
 Import-Module ActiveDirectory
 Import-Module C:\DynamicDocumentation\Dependencies\DEPMSSQLActions.psm1 -Force
 
