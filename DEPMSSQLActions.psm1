@@ -1,17 +1,4 @@
-﻿#----------------------------------------------------------------------#
-#
-# Module Name : DEPMSSQLActions.psm1
-# Created : 27.10.2016
-# Created by : Gisli Gudmundsson
-# LinkedIN : https://is.linkedin.com/in/gisli-gudmundsson-11a77639
-# License Usage : 
-#   This code can be used for private use only
-#   You may modify this code and distribute
-#
-#----------------------------------------------------------------------#
-
-
-#Import the SQL Server Powershell Module
+﻿#----------------------------------------------------------------------### Module Name : DEPMSSQLActions.psm1# Created : 27.10.2016# Created by : Gisli Gudmundsson# LinkedIN : https://is.linkedin.com/in/gisli-gudmundsson-11a77639# License Usage : #   This code can be used for private use only#   You may modify this code and distribute##----------------------------------------------------------------------##Import the SQL Server Powershell Module
 Import-Module SqlServer
 
 #Import custom made modules
@@ -26,6 +13,14 @@ function RunQuery($Query, $Environment){
     Invoke-Sqlcmd -Query $Query -ServerInstance $ServerInstance -Database $DatabaseName
 }
 
+function RunSelectQuery($Query, $Environment){
+    $ServerInstance = ServerInstance
+    $DatabaseName = DatabaseEnvironment -Environment $Environment
+
+    #Runs specific query that is added to the parameter
+    return Invoke-Sqlcmd -Query $Query -ServerInstance $ServerInstance -Database $DatabaseName
+}
+
 #Usage "AddMSSQLUserCount -UserCount $Integer -UserType $StringMax50Chars -CostCenter $StringMax50Chars
 function AddMSSQLUserCount($UserCount, $UserType, $CostCenter, $Environment){
     #Adds new row into the database
@@ -34,6 +29,24 @@ function AddMSSQLUserCount($UserCount, $UserType, $CostCenter, $Environment){
     "
     #Calls the Run-Query function
     RunQuery -Query $Insert_Query -Environment $Environment
+}
+
+function addMSSQLADAlerts($UserName, $Alert, $Environment){
+   #Adds new row into the database
+    $Insert_Query = "
+    INSERT INTO ADAlerts (UserName, Alert) VALUES ('$UserName','$Alert')
+    "
+    #Calls the Run-Query function
+    RunQuery -Query $Insert_Query -Environment $Environment
+}
+
+
+function getMSQLGlobalAdmins($Environment){
+    $Select_Query = "
+    SELECT * FROM ADGlobalAdmins
+    "
+    $GlobalAdmins = RunSelectQuery -Query $Select_Query -Environment $Environment
+    return $GlobalAdmins
 }
 
 #Usage "DebugShowMSSQLTable -TableName"
