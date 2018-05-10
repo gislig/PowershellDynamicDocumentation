@@ -66,3 +66,20 @@ function DebugCleanUpMSSQLUserCount($TableName, $ColumnName, $Environment){
     "
     RunQuery -Query $Clean_Query -Environment $Environment
 }
+
+function addMSSQLAuditServices($ServerName, $ServiceName, $Caption, $RunningAs, $Notes, $Environment){
+   #Adds new row into the database
+    $Insert_Query = "
+    INSERT INTO AuditServices (ServerName, ServiceName, Caption, RunningAs, Notes) VALUES ('$ServerName','$ServiceName','$Caption','$RunningAs','$Notes')
+    "
+    #Calls the Run-Query function
+    RunQuery -Query $Insert_Query -Environment $Environment
+}
+
+function addMSSQLOSInformation($OS_BootDevice,$OS_BuildNumber,$OS_BuildType,$OS_Caption,$OS_CodeSet,$OS_CountryCode,$OS_CurrentTimeZone,$OS_Description,$OS_InstallDate,$OS_LastBootUpTime,$OS_Architecture,$OS_SerialNumber,$OS_ServicePackMajorVersion,$OS_ServicePackMinorVersion,$OS_SystemDrive,$OS_TotalVirtualMemorySize,$bios_SMBIOSBIOSVersion,$bios_Manufacturer,$bios_Name,$bios_SerialNumber,$bios_Version,$bios_ReleaseDate,$bios_Status,$cpu_Caption,$cpu_Manufacturer,$cpu_MaxClockSpeed,$cpu_Name,$cpu_CurrentVoltage,$cpu_NumberOfCores,$cpu_NumberOfEnabledCore,$cpu_NumberOfLogicalProcessors,$cpu_VirtualizationFirmwareEnabled,$Environment){
+    $Insert_Query = "
+    INSERT INTO OSInformation (OS_BootDevice, OS_BuildNumber, OS_BuildType, OS_Caption, OS_CodeSet, OS_CountryCode, OS_CurrentTimeZone, OS_Description, OS_InstallDate, OS_LastBootUpTime, OS_Architecture, OS_SerialNumber, OS_ServicePackMajorVersion, OS_ServicePackMinorVersion, OS_SystemDrive, OS_TotalVirtualMemorySize, bios_SMBIOSBIOSVersion, bios_Manufacturer, bios_Name, bios_SerialNumber, bios_Version, bios_ReleaseDate, bios_Status, cpu_Caption, cpu_Manufacturer, cpu_MaxClockSpeed, cpu_Name, cpu_CurrentVoltage, cpu_NumberOfCores, cpu_NumberOfEnabledCore, cpu_NumberOfLogicalProcessors, cpu_VirtualizationFirmwareEnabled) VALUES ('$OS_BootDevice','$OS_BuildNumber','$OS_BuildType','$OS_Caption','$OS_CodeSet','$OS_CountryCode','$OS_CurrentTimeZone','$OS_Description','$OS_InstallDate','$OS_LastBootUpTime','$OS_Architecture','$OS_SerialNumber','$OS_ServicePackMajorVersion','$OS_ServicePackMinorVersion','$OS_SystemDrive','$OS_TotalVirtualMemorySize','$bios_SMBIOSBIOSVersion','$bios_Manufacturer','$bios_Name','$bios_SerialNumber','$bios_Version','$bios_ReleaseDate','$bios_Status','$cpu_Caption','$cpu_Manufacturer','$cpu_MaxClockSpeed','$cpu_Name','$cpu_CurrentVoltage','$cpu_NumberOfCores','$cpu_NumberOfEnabledCore','$cpu_NumberOfLogicalProcessors','$cpu_VirtualizationFirmwareEnabled')
+    "
+    RunQuery -Query $Insert_Query -Environment $Environment
+}
+
